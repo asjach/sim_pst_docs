@@ -1,10 +1,10 @@
 Project SIM_Pesantren_DBML {
   database_type: "MySQL"
-  Note: "Skema utama SIM Pesantren dalam satu database — REVISI [00-Fondasi]"
+  Note: "Skema utama SIM Pesantren dalam satu database"
 }
 
 // ===========
-// AUTH
+// MODUL AUTH
 // ===========
 
 Table users {
@@ -18,6 +18,22 @@ Table users {
   created_at datetime
   updated_at datetime
   deleted_at datetime [note: 'Soft delete: akun tidak dihapus permanen, terutama yang terhubung ke pegawai']
+}
+
+Table wali_santri {
+  id bigint [pk, increment]
+  user_id bigint [not null, note: 'Akun login orang tua/wali']
+  santri_id bigint [not null]
+  hubungan varchar [note: 'ayah / ibu / wali lain']
+  is_penanggung_jawab_utama boolean [not null, default: true, note: 'Kontak utama untuk tagihan/notifikasi']
+  created_at datetime
+  updated_at datetime
+
+  Indexes {
+    user_id
+    santri_id
+    (user_id, santri_id) [unique]
+  }
 }
 
 Table roles {
