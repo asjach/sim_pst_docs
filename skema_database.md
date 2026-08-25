@@ -10,14 +10,19 @@ Project SIM_Pesantren_DBML {
 Table users {
   id bigint [pk, increment]
   name varchar [not null]
-  email varchar [not null, unique]
+  email varchar [unique, note: 'Nullable, tapi unique jika diisi']
+  username varchar [unique, note: 'Nullable, tapi unique jika diisi']
+  no_telpon varchar [unique, note: 'Nullable, tapi unique jika diisi']
   email_verified_at timestamp
   password varchar [not null]
+  must_change_password boolean [not null, default: true]
   is_active boolean [not null, default: true]
+  last_login_at datetime
+  last_login_ip varchar(45)
   remember_token varchar
   created_at datetime
   updated_at datetime
-  deleted_at datetime [note: 'Soft delete: akun tidak dihapus permanen, terutama yang terhubung ke pegawai']
+  deleted_at datetime
 }
 
 Table wali_santri {

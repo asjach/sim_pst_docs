@@ -1,0 +1,2 @@
+- menggunakan Laravel 15
+- authentication menggunakan Laravel SANCTUM
